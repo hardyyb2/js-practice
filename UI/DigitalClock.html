@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+</head>
+<body>
+    <div id="time"></div>
+</body>
+<script>
+    function makeClock() {
+        let date = new Date()
+        let hours = date.getHours()
+        let minutes = date.getMinutes()
+        let seconds = date.getSeconds()
+        let session  = 'AM'
+
+        if(hours > 12) {
+            hours -= 12
+            session = 'PM'
+        }
+
+        if(hours === 0) {
+            hours = 12
+            session = 'AM'
+        }
+
+        hours = hours < 10 ? "0" + hours : hours
+        minutes = minutes < 10 ? "0" + minutes : minutes
+        seconds = seconds < 10 ? "0" + seconds : seconds
+
+        let time = `${hours}:${minutes}:${seconds} ${session}`
+
+        document.getElementById("time").innerText = time
+    }
+
+    setInterval(makeClock, 1000)
+</script>
+</html>

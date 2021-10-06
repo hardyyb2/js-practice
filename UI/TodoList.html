@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <form id="form">
+      <input type="text" id="input" placeholder="Enter todo" />
+      <button type="submit">Submit</button>
+    </form>
+    <ul id="Todo"></ul>
+  </body>
+  <script lang="js">
+    const LOCALSTORAGE_KEY = 'todos'
+
+    class Todo {
+        constructor() {
+            let localTodos = localStorage.getItem(LOCALSTORAGE_KEY)
+            if (localTodos) {
+                this.list = JSON.parse(localTodos)
+            }
+            else {
+                this.list = {}
+            }
+        }
+
+        add(todo) {
+            this.list[todo.id] = todo
+        }
+
+        delete(todo) {
+            delete this.list[todo.id]
+        }
+
+        save() {
+            localStorage.setItem(LOCALSTORAGE_KEY,  JSON.stringify(this.list))
+        }
+
+        print() {
+            for (const val of Object.values(this.list)) {
+                console.log(val)
+            }
+        }
+
+        getList() {
+            return this.list
+        }
+    }
+
+    const todoList = new Todo()
+
+    let docElem = document.getElementById("Todo")
+
+    function addElement(val) {
+        let li = document.createElement("li")
+        li.innerText =  val.title
+        li.onclick = function() {
+            li.parentElement.removeChild(li)
+            todoList.delete(val)
+            todoList.save()
+        }
+        docElem.append(li)
+    }
+
+    for(const val of Object.values(todoList.getList())) {
+        addElement(val)
+    }
+
+    // Input
+    const formElem = document.getElementById("form")
+    const inputElem = document.getElementById("input")
+
+    formElem.addEventListener("submit", function(e) {
+        if(!inputElem.value) return
+
+        e.preventDefault()
+        let val = {
+            id : inputElem.value,
+            title : inputElem.value
+        }
+        todoList.add(val)
+        todoList.save()
+        addElement(val)
+        inputElem.value = ''
+    })
+  </script>
+</html>
