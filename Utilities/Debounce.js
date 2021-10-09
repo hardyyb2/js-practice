@@ -14,4 +14,5 @@ function hello(name, surname) {
   console.log("My " + name + surname);
 }
 
-const debouncedFunction = debounce(() => hello("Hello", "Yello"), 600);
+const debouncedFunction = debounce(hello, 600);
+debouncedFunction("Hardik", "Badola");
