@@ -1,6 +1,6 @@
 const printNestedObj = (obj) => {
   for (const [key, value] of Object.entries(obj)) {
-    if (typeof value === "object" && !Array.isArray(obj)) {
+    if (typeof value === "object" && !Array.isArray(value)) {
       printNestedObj(value);
     } else {
       console.log(`key : ${key}, value : ${value} \n`);
