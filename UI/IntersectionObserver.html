@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .card {
+        width: 200px;
+        height: 50px;
+        border: 1px solid black;
+        margin-bottom: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100px);
+        opacity: 0;
+        transition: 150ms;
+      }
+
+      .show {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card-container">
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+    </div>
+  </body>
+  <script>
+    const cards = document.querySelectorAll(".card");
+
+    const observer = new IntersectionObserver(
+      (elements) => {
+        elements.forEach((elem) => {
+          elem.target.classList.add("show");
+          elem.target.classList.toggle("show", elem.isIntersecting);
+        });
+      },
+      {
+        threshold: 1,
+      }
+    );
+
+    cards.forEach((card) => {
+      card.innerText = "Hello";
+      observer.observe(card);
+    });
+  </script>
+</html>
